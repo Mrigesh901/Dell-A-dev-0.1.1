@@ -57,16 +57,14 @@ function handlePromptClick(userPrompt) {
     window.location.href = nextPageUrl;
 }
 
-const moreButton = document.getElementById("more");
-if (moreButton) { // Check if the button exists (optional)
-moreButton.addEventListener("click", function() {
-    // Use AJAX to fetch the content from /something_else
-    fetch('/something_else')
-        .then(response => response.text())
-        .then(html => {
-            // Replace existing content in the container (e.g., with id="content")
-            console.log(html)
-            document.getElementById("userInput").innerHTML = html;
-        });
-});
-}
+document.getElementById("more").addEventListener("click", function() {
+    //var previousInstruction = "{{ previous_instruction }}";
+    // Encode the variable value to make it URL-safe
+    //var encodedInstruction = encodeURIComponent(previousInstruction);
+    // Construct the URL with the variable as a parameter
+    //var url = "/something_else.html?previous_instruction=" + encodedInstruction;
+    var url = "/something_else.html?previous_instruction= write a poem";
+    // Navigate to the new page
+    alert('hello more gets fired');
+    window.location.href = url;
+})

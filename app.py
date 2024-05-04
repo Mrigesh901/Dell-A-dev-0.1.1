@@ -65,6 +65,19 @@ def something_else():
         response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
         session['previous_instruction'] = updated_previous_instruction
         return render_template('something_else_response.html', response=response)
+    
+@app.route('/something_else_response', methods=['GET', 'POST'])
+def something_else_response():
+    if request.method == 'GET':
+        previous_instruction = session.get('previous_instruction', "")
+        return render_template('something_else.html', previous_instruction=previous_instruction)
+    elif request.method == 'POST':
+        previous_instruction = session.get('previous_instruction', "")
+        new_instruction = request.form.get('new_instruction', '')
+        
+        response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
+        session['previous_instruction'] = updated_previous_instruction
+        return render_template('something_else_response.html', response=response)
 
 
 if __name__ == '__main__':

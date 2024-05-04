@@ -153,7 +153,7 @@ body {
     <div class="title">
         <p3>It can be in pdf, word or HTML format</p3>
     </div>
-<form class="form-container" action="/screen2" enctype='multipart/form-data'>
+<form class="form-container" action="/playwithresponse" enctype='multipart/form-data'>
     <!-- <input type="hidden" name="prompt_type" value="{{ prompt_type }}">
     <input type="hidden" name="custom_string" value="{{ custom_string }}"> -->
 	<div class="upload-files-container">
@@ -252,7 +252,7 @@ uploadButton.addEventListener("click", () => {
 					}
 
 						// Construct the URL with URL parameters
-					var url = "/screen2?prompt_type=" + encodeURIComponent(promptType) + "&custom_string=" + encodeURIComponent(customString) + "&custom_string1=" + encodeURIComponent(customString1);
+					var url = "/playwithresponse?prompt_type=" + encodeURIComponent(promptType) + "&custom_string=" + encodeURIComponent(customString) + "&custom_string1=" + encodeURIComponent(customString1);
 
 					window.location.href = url;
 									

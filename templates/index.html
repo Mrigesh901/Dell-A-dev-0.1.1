@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="title">Hello, What do you want me to do today?</h1>
+        <h2 class="Subtitle">Click on any of the tasks</h2>
+        <div class="examplePrompts">
+            <!-- <h2>Example Prompts:</h2> -->
+            <ul id="promptList">
+                <li onclick="redirectToPrompt('Summarise a document')">Summarise document</li>
+                <li onclick="redirectToPrompt('Answer questions about a document')">Answer question about a document</li>
+                <li onclick="redirectToPrompt('Draft the document')">Draft document</li>
+                <li onclick="redirectToPrompt('Update document')">Update document</li>
+                <li onclick="redirectToPrompt('Something Else')">Something Else</li>
+                <!-- <li onclick="redirectToPrompt('Paraphrase the text')">Paraphrase the text</li> 
+                    <li onclick="redirectToPrompt('Create ideas for Brainstorming')">Create ideas for Brainstorming</li> -->
+                <!-- <li onclick="redirectToPrompt('Legal research')">Legal research</li> -->
+            </ul>
+        </div>
+    </div>
+
+    {% endblock %}

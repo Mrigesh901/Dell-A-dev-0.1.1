@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Add your CSS styles here -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">{{ custom_string }}</h1>
+        <p>You may optionally modify it before clicking Save.</p>
+
+        <!-- Output box for displaying the result -->
+        <div class="inputContainer">
+            <textarea id="output" rows="10" cols="50">Result is : </textarea>
+        <!-- Save button to save the result -->
+        <button id="save">Save</button>
+        </div>
+        <div class="container">
+            <p>{{ custom_string1 }}</p>
+        </div>
+        <div class="container">
+            <button id="elaborate">Elaborate</button>
+            <button id="condense">Condense</button>
+            <button id="new">New Summary</button>
+        </div>
+
+        <div class="container">
+        <!-- Text box for custom query -->
+            <textarea id="custom_query" rows="3" cols="50"></textarea>
+            <button id="do">DO</button>
+        </div>
+        <!-- Buttons for elaborating, condensing, and generating a new summary -->
+                
+        <!-- DO button to perform the action based on the custom query -->
+        
+        
+        <!-- Add your JavaScript code here -->
+    </div>
+</body>
+</html>

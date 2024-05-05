@@ -20,8 +20,6 @@ from pprint import pprint
 #   api_key = userdata.get(SecretName)
 #   return (api_key)
 
-
-
 #Gemini Parameters
 api_key = API_KEY
 def set_model_parameters(model= "gemini-pro",

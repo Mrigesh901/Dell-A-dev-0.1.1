@@ -12,15 +12,12 @@ app = Flask(__name__)
 
 app.secret_key = SESSION_SECRET
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
-
 @app.route('/prompt/<prompt_type>')
-def FileUpload(prompt_type):
+def RenderPromptPage(prompt_type):
     custom_string = ""
     if prompt_type == "Draft the document":
         custom_string = "Enter below what document you want to create and click Do"
@@ -43,7 +40,6 @@ def FileUpload(prompt_type):
         return render_template('something_else.html', prompt_type=prompt_type, custom_string=custom_string)
 
 
-
 @app.route('/playwithresponse', methods=['GET'])
 def playwithresponse():
     prompt_type = request.args.get('prompt_type')
@@ -56,28 +52,31 @@ def playwithresponse():
 @app.route('/something_else', methods=['GET', 'POST'])
 def something_else():
     if request.method == 'GET':
+        print("somethingelse GET fired")
         previous_instruction = session.get('previous_instruction', "")
-        return render_template('something_else.html', previous_instruction=previous_instruction)
+        custom_string = "Enter Below what you have in mind and click Do"
+        return render_template('something_else.html', new_instruction=previous_instruction,custom_string=custom_string)
     elif request.method == 'POST':
-        previous_instruction = session.get('previous_instruction', "")
         new_instruction = request.form.get('new_instruction', '')
-        
-        response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
+        response, updated_previous_instruction = DoSomethingElse.do_the_work(instruction=new_instruction)
         session['previous_instruction'] = updated_previous_instruction
         return render_template('something_else_response.html', response=response)
-    
+
+
 @app.route('/something_else_response', methods=['GET', 'POST'])
 def something_else_response():
     if request.method == 'GET':
+        print("something_else_response GET fired")
+        #print(request)
         previous_instruction = session.get('previous_instruction', "")
         return render_template('something_else.html', previous_instruction=previous_instruction)
     elif request.method == 'POST':
-        previous_instruction = session.get('previous_instruction', "")
-        new_instruction = request.form.get('new_instruction', '')
-        
-        response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
-        session['previous_instruction'] = updated_previous_instruction
-        return render_template('something_else_response.html', response=response)
+        return redirect(url_for('something_else'))
+
+
+@app.route('/something_else_final', methods=['GET', 'POST'])
+def something_else_final():
+    return render_template('Something_else_final.html')
 
 
 if __name__ == '__main__':

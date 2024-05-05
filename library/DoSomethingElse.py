@@ -19,32 +19,24 @@ def set_prompt():
   return(prompt)
 
 
-def do_something_else(model, previous_instruction, new_instruction):
-
-    #Previous_instruction is used to prefill the textbox in the GUI, so that user can optionally modify it
-    #Not used in this program
+def do_something_else(model, instruction):
 
     #Now on SomethinElse:Screen1 in GUI
     # new_instruction = input("Enter what you have in mind:")
-    new_instruction = new_instruction
     prompt = set_prompt()
     #print("PROMPT: ", prompt)
     chain = LLMChain(prompt = prompt, llm = model)
     #print("CHAIN: ", chain)
 
-    resp = chain.invoke({"input_text": new_instruction,})
+    resp = chain.invoke({"input_text": instruction,})
 
     text = resp["text"]
-    pprint(text)
-    previous_instruction = new_instruction
-    # add_to_transcript(new_instruction, text)
-
-    return(text,previous_instruction)
+    #pprint(text)
+    return(text,instruction)
 
 
 
-def do_the_work(new_instruction,previous_instruction):
+def do_the_work(instruction):
   model = Util.set_model_parameters()
-  previous_instruction = previous_instruction
-  text, previous_instruction = do_something_else(model, previous_instruction, new_instruction)
+  text, previous_instruction = do_something_else(model, instruction)
   return text,previous_instruction

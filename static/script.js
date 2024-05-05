@@ -57,14 +57,12 @@ function handlePromptClick(userPrompt) {
     window.location.href = nextPageUrl;
 }
 
-document.getElementById("more").addEventListener("click", function() {
-    //var previousInstruction = "{{ previous_instruction }}";
-    // Encode the variable value to make it URL-safe
-    //var encodedInstruction = encodeURIComponent(previousInstruction);
-    // Construct the URL with the variable as a parameter
-    //var url = "/something_else.html?previous_instruction=" + encodedInstruction;
-    var url = "/something_else.html?previous_instruction= write a poem";
-    // Navigate to the new page
-    alert('hello more gets fired');
-    window.location.href = url;
-})
+// function handleMoreButtonClick() {
+//     // Action for the "More" button
+//     document.getElementById("something_else_form").action = "/something_else";
+// }
+
+function handleDoneButtonClick() {
+    // Action for the "Done" button
+    document.getElementById("something_else_form").action = "/something_else_final";
+}

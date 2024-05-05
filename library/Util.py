@@ -44,12 +44,12 @@ TASK_NAME = 'SomethingElse'
 # MOUNT_ROOT = '/content/drive'
 # Transcripts_Folder = MOUNT_ROOT + '/MyDrive/Transcripts/' + TASK_NAME
 
-# transcript = [] # array of prompt-response pairs
+transcript = [] # array of prompt-response pairs
 
-# def add_to_transcript(prompt, response):
+def add_to_transcript(prompt, response):
 
-#   an_entry = dict(prompt = prompt, response = response)
-#   transcript.append(an_entry)
+  an_entry = dict(prompt = prompt, response = response)
+  transcript.append(an_entry)
 
 # def timestamp_string ():
 

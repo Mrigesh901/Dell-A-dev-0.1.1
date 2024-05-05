@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 
 from pprint import pprint
 
-from library import DoSomethingElse
+from library import DoSomethingElse, Util
 from config import SESSION_SECRET
 
 app = Flask(__name__)
@@ -60,6 +60,7 @@ def something_else():
         new_instruction = request.form.get('new_instruction', '')
         response, updated_previous_instruction = DoSomethingElse.do_the_work(instruction=new_instruction)
         session['previous_instruction'] = updated_previous_instruction
+        Util.add_to_transcript(new_instruction,response=response)
         return render_template('something_else_response.html', response=response)
 
 
@@ -76,7 +77,20 @@ def something_else_response():
 
 @app.route('/something_else_final', methods=['GET', 'POST'])
 def something_else_final():
-    return render_template('Something_else_final.html')
+    download_link = url_for('download_transcript')
+    return render_template('Something_else_final.html', transcript = Util.transcript, download_link=download_link)
+
+
+@app.route('/download_transcript', methods=['GET'])
+def download_transcript():
+    transcript_content = ""
+    for entry in Util.transcript:
+        transcript_content += f"Prompt: {entry['prompt']}\n"
+        transcript_content += f"Response: {entry['response']}\n\n"
+
+    # Return the transcript file as a downloadable attachment
+    return transcript_content, 200, {'Content-Type': 'text/plain', 'Content-Disposition': 'attachment; filename="transcript.txt"'}
+
 
 
 if __name__ == '__main__':

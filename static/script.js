@@ -56,3 +56,13 @@ function handlePromptClick(userPrompt) {
     // Redirect to the next page with the selected user prompt
     window.location.href = nextPageUrl;
 }
+
+// function handleMoreButtonClick() {
+//     // Action for the "More" button
+//     document.getElementById("something_else_form").action = "/something_else";
+// }
+
+function handleDoneButtonClick() {
+    // Action for the "Done" button
+    document.getElementById("something_else_form").action = "/something_else_final";
+}

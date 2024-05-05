@@ -2,17 +2,13 @@
 
 {% block content %}
 <div class="container">
-    <form id="something_else_form1" action="/something_else_response" method="post">
+    <form id="something_else_form" action="/something_else_response" method="post">
         <div class="inputContainer">
             <textarea id="output" rows="10" cols="50">{{ response }}</textarea>
         </div>
         <div class="buttons">
             <button type="submit" id="more">More</button>
-        </div>
-    </form>
-    <form id="something_else_form2" action="/something_else_final" method="post">
-        <div class="buttons">
-            <button type="submit" id="done">Done</button>
+            <button type="submit" id="done" onclick="handleDoneButtonClick()">Done</button>
         </div>
     </form>
 </div>

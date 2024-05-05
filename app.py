@@ -57,12 +57,11 @@ def playwithresponse():
 def something_else():
     if request.method == 'GET':
         previous_instruction = session.get('previous_instruction', "")
-        return render_template('something_else.html', previous_instruction=previous_instruction)
+        custom_string = "Enter Below what you have in mind and click Do"
+        return render_template('something_else.html', new_instruction=previous_instruction,custom_string=custom_string)
     elif request.method == 'POST':
-        previous_instruction = session.get('previous_instruction', "")
         new_instruction = request.form.get('new_instruction', '')
-        
-        response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
+        response, updated_previous_instruction = DoSomethingElse.do_the_work(instruction=new_instruction)
         session['previous_instruction'] = updated_previous_instruction
         return render_template('something_else_response.html', response=response)
     
@@ -72,13 +71,12 @@ def something_else_response():
         previous_instruction = session.get('previous_instruction', "")
         return render_template('something_else.html', previous_instruction=previous_instruction)
     elif request.method == 'POST':
-        previous_instruction = session.get('previous_instruction', "")
-        new_instruction = request.form.get('new_instruction', '')
-        
-        response, updated_previous_instruction = DoSomethingElse.do_the_work(new_instruction=new_instruction,previous_instruction=previous_instruction)
-        session['previous_instruction'] = updated_previous_instruction
-        return render_template('something_else_response.html', response=response)
 
+        return redirect(url_for('something_else'))
+
+@app.route('/something_else_final', methods=['GET', 'POST'])
+def something_else_final():
+    return render_template('Something_else_final.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

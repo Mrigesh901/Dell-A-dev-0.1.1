@@ -56,15 +56,3 @@ function handlePromptClick(userPrompt) {
     // Redirect to the next page with the selected user prompt
     window.location.href = nextPageUrl;
 }
-
-document.getElementById("more").addEventListener("click", function() {
-    //var previousInstruction = "{{ previous_instruction }}";
-    // Encode the variable value to make it URL-safe
-    //var encodedInstruction = encodeURIComponent(previousInstruction);
-    // Construct the URL with the variable as a parameter
-    //var url = "/something_else.html?previous_instruction=" + encodedInstruction;
-    var url = "/something_else.html?previous_instruction= write a poem";
-    // Navigate to the new page
-    alert('hello more gets fired');
-    window.location.href = url;
-})

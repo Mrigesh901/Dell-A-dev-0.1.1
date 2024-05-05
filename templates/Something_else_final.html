@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h4>Below is link to the transcript of our session</h4>
+    <div class="container">
+        <input type="text" id="transcriptLink" readonly>
+        <button id="copybutton" onclick="copyTranscript()">Copy</button>
+    </div>
+    <div class="container" style="text-align: center;">
+        <button id="newbutton" onclick="redirectToIndex()">Do a New Task</button>
+    </div>
+</div>
+    <script>
+        function copyTranscript() {
+            var transcript = document.getElementById("transcriptLink");
+            transcript.select();
+            document.execCommand("copy");
+        }
+
+        function redirectToIndex() {
+            window.location.href = "/index.html";
+        }
+    </script>
+
+
+
+{% endblock %}

@@ -67,8 +67,6 @@ def something_else():
 @app.route('/something_else_response', methods=['GET', 'POST'])
 def something_else_response():
     if request.method == 'GET':
-        print("something_else_response GET fired")
-        #print(request)
         previous_instruction = session.get('previous_instruction', "")
         return render_template('something_else.html', previous_instruction=previous_instruction)
     elif request.method == 'POST':

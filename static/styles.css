@@ -104,7 +104,7 @@ button[type="submit"]:hover {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 #promptList li {
@@ -118,6 +118,7 @@ button[type="submit"]:hover {
     font-family:'Times New Roman', Times, serif;
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
 }
 
 #promptList li:hover {
@@ -126,28 +127,28 @@ button[type="submit"]:hover {
 }
 
 /* Follow-up Prompts Styles */
-#followUpPrompts {
+/* #followUpPrompts {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
+} */
 
-#followUpPrompts li {
-    width: calc(33.33% - 20px); /* Three cards per row with spacing */
+/* #followUpPrompts li {
+    width: calc(33.33% - 20px);
     margin-bottom: 20px;
     padding: 15px;
     background-color: #e8d7eb;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    box-sizing: border-box; /* Include padding and border in width calculation */
+    box-sizing: border-box;
     font-family:'Times New Roman', Times, serif;
     font-style: italic;
-    font-weight: bold;
+    font-weight: bold; 
 }
-
+*/
 @media (max-width: 768px) {
     #followUpPrompts li {
         width: 100%; /* Display cards in one column on smaller screens */

@@ -53,13 +53,12 @@ def playwithresponse():
 def something_else():
     if request.method == 'GET':
         print("somethingelse GET fired")
-        previous_instruction = session.get('previous_instruction', "")
+        previous_instruction = Util.transcript[-1]['prompt']
         custom_string = "Enter Below what you have in mind and click Do"
         return render_template('something_else.html', new_instruction=previous_instruction,custom_string=custom_string)
     elif request.method == 'POST':
         new_instruction = request.form.get('new_instruction', '')
         response, updated_previous_instruction = DoSomethingElse.do_the_work(instruction=new_instruction)
-        session['previous_instruction'] = updated_previous_instruction
         Util.add_to_transcript(new_instruction,response=response)
         return render_template('something_else_response.html', response=response)
 
@@ -67,7 +66,7 @@ def something_else():
 @app.route('/something_else_response', methods=['GET', 'POST'])
 def something_else_response():
     if request.method == 'GET':
-        previous_instruction = session.get('previous_instruction', "")
+        previous_instruction = Util.transcript[-1]['prompt']
         return render_template('something_else.html', previous_instruction=previous_instruction)
     elif request.method == 'POST':
         return redirect(url_for('something_else'))

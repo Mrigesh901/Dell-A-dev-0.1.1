@@ -36,7 +36,7 @@ def RenderPromptPage(prompt_type):
         return render_template('FileUpload.html', prompt_type=prompt_type, custom_string=custom_string)
 
     elif prompt_type == "Something Else":
-        custom_string = "Enter Below what you have in mind and click Do"
+        custom_string = "Enter below what you have in mind and click Do"
         return render_template('something_else.html', prompt_type=prompt_type, custom_string=custom_string)
 
 

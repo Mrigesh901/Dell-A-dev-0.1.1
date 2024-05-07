@@ -1,24 +1,9 @@
-// function addPrompt(promptText) {
-//     const userInput = document.getElementById('userInput');
-//     userInput.value = promptText;
-//     enableSubmit();
-// }
 
 function redirectToPrompt(promptType) {
     // Redirect to the common prompt page with the selected prompt type
     window.location.href = "/prompt/" + encodeURIComponent(promptType);
 }
 
-// function enableSubmit() {
-//     const userInput = document.getElementById('userInput').value.trim();
-//     const submitBtn = document.getElementById('submitBtn');
-
-//     if (userInput) {
-//         submitBtn.disabled = false; // Enable submit button if there's text in the input
-//     } else {
-//         submitBtn.disabled = true; // Disable submit button if input is empty
-//     }
-// }
 
 function submitPrompt() {
     const userInput = document.getElementById('userInput').value.trim(); // Get user input and remove leading/trailing whitespace
@@ -57,10 +42,6 @@ function handlePromptClick(userPrompt) {
     window.location.href = nextPageUrl;
 }
 
-// function handleMoreButtonClick() {
-//     // Action for the "More" button
-//     document.getElementById("something_else_form").action = "/something_else";
-// }
 
 function handleDoneButtonClick() {
     // Action for the "Done" button

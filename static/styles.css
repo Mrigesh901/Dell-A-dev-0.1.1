@@ -126,39 +126,12 @@ button[type="submit"]:hover {
     background-color: #e0e0e0; /* Change background color on hover */
 }
 
-/* Follow-up Prompts Styles */
-/* #followUpPrompts {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-} */
-
-/* #followUpPrompts li {
-    width: calc(33.33% - 20px);
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #e8d7eb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    box-sizing: border-box;
-    font-family:'Times New Roman', Times, serif;
-    font-style: italic;
-    font-weight: bold; 
-}
-*/
 @media (max-width: 768px) {
     #followUpPrompts li {
         width: 100%; /* Display cards in one column on smaller screens */
     }
 }
 
-#followUpPrompts li:hover {
-    transform: scale(1.05); /* Scale up by 5% on hover */
-    background-color: #e0e0e0; /* Change background color on hover */
-}
 
 footer {
     background-color: #007bff;

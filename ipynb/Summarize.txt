@@ -1,0 +1,140 @@
+def extract_pages_from_file(file_on_gdrive):
+  !pip install -q --upgrade pypdf
+  !pip install -q --upgrade unstructured
+  !pip install -q --upgrade docx2txt
+
+
+  from langchain.document_loaders import PyPDFLoader
+  from langchain.document_loaders import Docx2txtLoader
+  #from langchain.document_loaders import UnstructuredHTMLLoader
+  from langchain.document_loaders import BSHTMLLoader
+
+  PDF = "application/pdf"
+  DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  HTML = "text/html"
+
+  pages = None
+
+  import mimetypes
+  mtype, encoding = mimetypes.guess_type(file_on_gdrive)
+
+  if mtype == PDF:
+    loader = PyPDFLoader(file_on_gdrive)
+    pages =  loader.load_and_split()
+  elif mtype == DOCX:
+    loader = Docx2txtLoader(file_on_gdrive)
+    pages = loader.load_and_split()
+  elif mtype == HTML:
+    #loader = UnstructuredHTMLLoader(file_on_gdrive) #DOES NOT WORK???
+    loader = BSHTMLLoader(file_on_gdrive)
+    pages = loader.load_and_split()
+  else:
+    print("In extract_pages_from_file(): File on gdrive: ", file_on_gdrive)
+    print("Unknown Mime Type: ", mtype)
+
+  return(pages)
+
+def copy_webfile_to_gdrive(url):
+
+  import urllib.request
+  import os
+
+  drive.mount(MOUNT_ROOT, force_remount=True)
+
+  Data_Folder = MOUNT_ROOT + '/MyDrive/Temp/'
+
+  if not os.path.exists(Data_Folder):
+    os.mkdir(Data_Folder)
+
+  fileid = url.split('/')[-1] #last part of URL
+  gdrive_filename = str(path(Data_Folder, fileid))
+
+  urllib.request.urlretrieve(url, gdrive_filename)
+
+  return(gdrive_filename)
+
+
+def extract_document_pages(doc_url):
+
+  #temprarily copy the content of doc_url into grdrive
+  gdrive_filename = copy_webfile_to_gdrive(doc_url)
+
+  #extract pages from gdrive_filename
+  pages = extract_pages_from_file(gdrive_filename)
+
+  #remove gdrive file
+  os.unlink(gdrive_filename)
+
+  return (pages)
+
+
+def load_document():
+
+ url = input ("The URL of your document: ")
+ pages = extract_document_pages(url)
+
+ return(pages)
+
+
+def set_summarize_prompt(type_of_summary):
+
+  #prompt_template = """Write a concise summary of the following:
+  #prompt_template = """Write a page-wise summary of the following
+  #prompt_template = """Write a detailed summary of the following:
+  #prompt_template = """Write an executive summary of the following:
+
+  prompt_template = "Provide xxx from the following:\n'{text}'\n'SUMMARY:"
+  prompt_template = prompt_template.replace("xxx", type_of_summary)
+
+  prompt = PromptTemplate.from_template(prompt_template)
+  print(prompt)
+
+
+  return(prompt)
+
+
+def create_summary(model, pages, type_of_summary):
+
+  prompt = set_summarize_prompt(type_of_summary)
+  chain = load_summarize_chain(llm=model, chain_type="stuff", prompt=prompt)
+
+  summary = chain({"input_documents": [pages[i] for i in range(0, len(pages)-1)]}, return_only_outputs=True)
+
+  add_to_transcript(type_of_summary, summary)
+
+  return(summary)
+
+
+def main():
+
+  stype = {
+      "default" : "the key takeaways",
+      "condense" : "a concise summary",
+      "elaborate" : "a page-wise summary",
+      "new": "an executive summary",
+
+      "concise" : "a concise summary",
+      "takeaways" : "the key takeaways",
+      "executive" : "an executive summary",
+      "detailed" : "a detailed summary",
+      "page-wise": "a page-wise summary",
+  }
+
+  model = set_model_parameters()
+  pages = load_document()
+
+  summary = create_summary(model, pages, stype['default'])
+  pprint(summary)
+
+  summary = create_summary(model, pages, stype['condense'])
+  pprint(summary)
+
+  summary = create_summary(model, pages, stype['elaborate'])
+  pprint(summary)
+
+  summary = create_summary(model, pages, stype['new'])
+  pprint(summary)
+
+
+  if (Sesssion_Logging):
+    save_transcript_on_gdrive()
